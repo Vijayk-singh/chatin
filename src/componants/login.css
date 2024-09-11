@@ -1,0 +1,45 @@
+/* Centering the form toggle button */
+.centered {
+    text-align: center;
+  }
+  
+  /* Common input styles */
+  .input-style {
+    display: block;
+    width: 90%; /* Adjust to be responsive within the container */
+    max-width: 400px; /* Limit width to 400px */
+    padding: 12px; /* Padding for better visual appeal */
+    margin: 15px auto; /* Centering the input with space around */
+    border: 1px solid #ccc; /* Uniform border */
+    border-radius: 4px; /* Slightly rounded corners for aesthetics */
+    font-size: 16px; /* Increase font size for readability */
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+  }
+  
+  /* Common button styles */
+  .button-style {
+    padding: 12px 20px; /* Slightly larger padding for better button size */
+    margin: 10px auto; /* Centering button with margin */
+    width: 90%; /* Ensure button width matches input */
+    max-width: 400px; /* Same max width for consistency */
+    background-color: #007bff; /* Blue background */
+    color: #fff; /* White text */
+    border: none; /* Remove default border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Matching font size with input */
+    text-align: center; /* Center button text */
+  }
+  
+  /* Form container */
+  .form-container {
+    max-width: 480px; /* Maximum width of the form */
+    margin: 10px auto; /* Center the form with margin on top and bottom */
+    padding: 8px; /* Inner padding */
+    border: 1px solid #ddd; /* Border around form */
+    border-radius: 8px; /* Rounded edges for the form */
+    background-color: #f9f9f9; /* Light background for contrast */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a lifted effect */
+    text-align: center; /* Center all text */
+  }
+  
