@@ -1,33 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
-import { io } from 'socket.io-client'; // Import Socket.IO
-import Header from './Header';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './componants/Login';
-import Home from './componants/Home'
+import Home from './componants/Home';
 import Chat from './componants/Chat';
-
-const ENDPOINT = "http://localhost:5000"; // Backend server endpoint
-
+import { useAuth } from './context/AuthContext'; // Import useAuth to check login status
 
 
+const App = () => {
+  const { isLoggedIn } = useAuth(); // Access authentication status
 
-
-
-
-
-
-function App() {
   return (
+  
     <Router>
       <Routes>
-        {/* <Route path="/" element={localStorage.getItem('token')?<Home/>:<Login/>} /> */}
-        <Route path="/" element={<Home />} />
-        <Route path="/chat/:userId" element={<Chat/>} />
-        <Route path="/login" element={<Login/>} />
+        {/* Public Route */}
+        <Route path="/login" element={!isLoggedIn ? <Login /> : <Navigate to="/" />} />
+
+        {/* Protected Routes */}
+        <Route
+          path="/"
+          element={isLoggedIn ? <Home /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/chat/:userId"
+          element={isLoggedIn ? <Chat /> : <Navigate to="/login" />}
+        />
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;

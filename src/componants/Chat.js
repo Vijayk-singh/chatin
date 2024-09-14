@@ -1,16 +1,27 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { io } from "socket.io-client"; // Import Socket.IO
+import { io } from "socket.io-client";
+import { useAuth } from "../context/AuthContext"; // Import useAuth
 import Header from "../Header";
 import Backbtn from "./minicomp/Backbtn";
+import { useNavigate } from 'react-router-dom';
 
 const ENDPOINT = "http://localhost:5000";
 
 function Chat() {
+  const { isLoggedIn } = useAuth(); // Access authentication status
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate('/login'); // Redirect to login if not logged in
+    }
+  }, [isLoggedIn, navigate]);
+
   const [messages, setMessages] = useState([]);
   const [messageContent, setMessageContent] = useState("");
   const [chatId, setChatId] = useState("");
-  const [socket, setSocket] = useState(null); // Add socket state
+  const [socket, setSocket] = useState(null);
   const selectedUserId = localStorage.getItem("user2Id");
   const currentUserId = localStorage.getItem("userId");
 
@@ -22,7 +33,7 @@ function Chat() {
       setMessages((prevMessages) => [...prevMessages, newMessage]);
     });
     return () => {
-      newSocket.disconnect(); // Cleanup socket connection when unmounting
+      newSocket.disconnect();
     };
   }, [currentUserId]);
 
@@ -96,40 +107,34 @@ function Chat() {
           style={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "center", // Align items centrally
-            padding: "10px 15px", // Adjusted padding to fit nicely
+            alignItems: "center",
+            padding: "10px 15px",
             backgroundColor: "#f1f1f1",
             borderBottom: "1px solid #ddd",
-            // height: "60px", // Reduced height
           }}
         >
-          {/* Back button */}
           <Backbtn />
-
-          {/* Center Title */}
           <h4
             style={{
               margin: "0",
               fontSize: "18px",
-              textAlign: "center", // Center-align the text
+              textAlign: "center",
             }}
           >
             Chat
           </h4>
-
-          {/* Right-side icon with username */}
           <span
             style={{
               display: "flex",
-              alignItems: "center", // Align text with the icon
+              alignItems: "center",
               gap: "10px",
-              fontSize: "16px", // Font size smaller
+              fontSize: "16px",
               color: "black",
             }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="25" // Reduced size of icon
+              width="25"
               height="25"
               fill="currentColor"
               viewBox="0 0 16 16"
@@ -144,10 +149,10 @@ function Chat() {
         {/* Message List */}
         <div
           style={{
-            height: "360px", // Adjusted height for scrolling
+            height: "360px",
             overflowY: "scroll",
             border: "1px solid #ccc",
-            padding: "10px", // Consistent padding
+            padding: "10px",
             marginBottom: "10px",
           }}
         >
@@ -161,85 +166,56 @@ function Chat() {
                 marginBottom: "10px",
               }}
             >
-              {/* Message Layout */}
               <div
                 style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: "10px", // Space between image and text
-                  maxWidth: "60%", // Ensure messages don't go too wide
-                  padding: "10px",
                   backgroundColor:
-                    msg.sender._id === currentUserId ? "#d1f7d6" : "#f1f0f0",
-                  borderRadius: "8px",
+                    msg.sender._id === currentUserId ? "#dcf8c6" : "#fff",
+                  padding: "10px",
+                  borderRadius: "10px",
+                  maxWidth: "60%",
+                  wordBreak: "break-word",
                 }}
               >
-                {/* Profile Picture */}
-                <img
-                  src="https://via.placeholder.com/40"
-                  alt="Profile"
-                  style={{
-                    borderRadius: "50%",
-                    width: "40px",
-                    height: "40px",
-                  }}
-                />
-
-                {/* Message Content */}
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  {/* Username and Email */}
-                  <div style={{ marginBottom: "5px" }}>
-                    <strong style={{fontSize:"12px", fontWeight:'100', color:"#342df2",fontFamily: 'circular'}}>{msg.sender.name}</strong>{" "}
-                    <span style={{ fontSize: "10px", color: "#888" }}>
-                      {msg.sender.email}
-                    </span>
-                  </div>
-
-                  {/* Message */}
-                  <p style={{ margin: 0 }}>{msg.content}</p>
-                </div>
+                {msg.content}
               </div>
             </div>
           ))}
         </div>
-
 
         {/* Message Input */}
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-between",
+            padding: "10px",
+            borderTop: "1px solid #ddd",
+            backgroundColor: "#f9f9f9",
           }}
         >
           <input
             type="text"
             value={messageContent}
             onChange={(e) => setMessageContent(e.target.value)}
-            placeholder="Type a message..."
+            placeholder="Type a message"
             style={{
               flex: 1,
               padding: "10px",
               borderRadius: "5px",
-              border: "1px solid #ccc",
+              border: "1px solid #ddd",
               marginRight: "10px",
             }}
           />
           <button
             onClick={sendMessage}
             style={{
-              padding: "5px 15px",
+              padding: "10px 15px",
               borderRadius: "5px",
-              backgroundColor: "#fff",
-              border: "1px solid #ccc",
-              cursor: "pointer",
+              border: "none",
+              backgroundColor: "#007bff",
+              color: "#fff",
             }}
           >
-            <img
-              src="https://img.icons8.com/?size=30&id=60700&format=png&color=000000"
-              alt="send"
-              style={{ width: "25px", height: "25px" ,display:"flex"}} // Adjusted size of the send icon
-            />
+            Send
           </button>
         </div>
       </div>

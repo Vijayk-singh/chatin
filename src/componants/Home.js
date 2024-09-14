@@ -12,7 +12,7 @@ function Home() {
   
       const fetchUsers = async () => {
         try {
-          const response = await axios.get('http://localhost:5000/api/user', {
+          const response = await axios.get('http://localhost:5000/api/user/allusers', {
             headers: { Authorization: `Bearer ${token}` }
           });
           setUsers(response.data);
@@ -73,7 +73,7 @@ function Home() {
           >
             <img
               alt="profile"
-              src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fpngtree.com%2Fso%2Fchat-app-logo&psig=AOvVaw2VLm64hueXiAhigPeFFjnN&ust=1726067013039000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCIiF2vDSuIgDFQAAAAAdAAAAABAY"
+              src="https://img.icons8.com/?size=50&id=13042&format=png&color=000000"
               style={{
                 width: '50px',
                 height: '50px',

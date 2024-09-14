@@ -1,0 +1,111 @@
+/* Header container */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
+    background-color: #f4f4f4;
+    border-bottom: 2px solid #ddd;
+    flex-wrap: wrap;
+  }
+  
+  /* Left container for logo */
+  .left-container {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  
+  .left-container img {
+    width: 50px;
+    height: 50px;
+    border-radius: 70px;
+    display: flex;
+  }
+  
+  .left-container p {
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: lighter;
+  }
+  
+  /* Center container for welcome message */
+  .center-container {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 16px;
+  }
+  
+  /* Right container for user profile and menu */
+  .right-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    text-align: center;
+  }
+  
+  .right-container img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    /* display: flex; */
+  }
+  
+  .menu {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 150px;
+    z-index: 1000;
+    text-align: center;
+  }
+  
+  .menu-item {
+    
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    align-items: center;
+  }
+  
+  .menu-item img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .menu-item p {
+    margin: 5px;
+  }
+  
+  .menu-item .viewprofilebtn {
+    width: 100%;
+    padding: 5px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .menu-item button {
+    width: 100%;
+    padding: 5px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .menu-item .logout {
+    color: red;
+    cursor: pointer;
+    text-align: center;
+  }
+  
